@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='index.css')}}">
+    <meta charset="UTF-8">
+    <title> Отчеты Jira </title>
+</head>
+<body>
+<div class="p-3">
+    <div class="well text-center">
+        <h1>Отчеты JIRA</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
+            <form action="{{url_for('create')}}" method="POST">
+                <div class="form-group">
+                <label for="Reports">Выберите тип отчета</label>
+                  <select class="form-control" id="Reports" name="report">
+                      <option value="1">Отчет по трудозатратам команды за заданный период</option>
+                      <option value="2">Отчет с «просроченными» задачами по команде за заданный период</option>
+                      <option value="3">Отчет по эпикам, которые превысили T2M в 90 рабочих дней</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                <label for="Projects">Выберите проект</label>
+                  <select class="form-control" id="Projects" name="project">
+                    {% for project in projects %}
+                      <option value="{{project}}">{{project}}</option>
+                    {% endfor %}
+                  </select>
+              </div>
+              <div class="form-group">
+                <label for="start-date" class="col-form-label">Дата начала отчета</label>
+                  <input class="form-control" type="date" id="start-date" name="start">
+              </div>
+              <div class="form-group">
+                <label for="end-date" class="col-form-label">Дата завершения отчета</label>
+                    <input class="form-control" type="date" id="end-date" name="end">
+              </div>
+            <button type="submit" class="btn btn-primary btn-block">Выполнить</button>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="text-center"><img src="static/img/jira.svg" width="200px" height="200px"></div>
+</div>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
